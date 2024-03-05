@@ -873,6 +873,36 @@ export interface ApiPlatformPlatform extends Schema.CollectionType {
   };
 }
 
+export interface ApiPublisherPublisher extends Schema.CollectionType {
+  collectionName: 'publishers';
+  info: {
+    singularName: 'publisher';
+    pluralName: 'publishers';
+    displayName: 'publisher';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required & Attribute.Unique;
+    slug: Attribute.UID<'api::publisher.publisher', 'name'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::publisher.publisher',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::publisher.publisher',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -894,6 +924,7 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::developer.developer': ApiDeveloperDeveloper;
       'api::platform.platform': ApiPlatformPlatform;
+      'api::publisher.publisher': ApiPublisherPublisher;
     }
   }
 }
