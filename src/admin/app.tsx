@@ -31,6 +31,10 @@ export default {
           neutral100: '#030415',
         }
       }
+    },
+    tutorials: false,
+    notifications: {
+      releases: false
     }
   },
   bootstrap() {
